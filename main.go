@@ -44,7 +44,7 @@ func main() {
 	par.BorderFg = ui.ColorCyan
 
 	status = ui.NewPar("STOPPED")
-	status.Height = 3
+	status.Height = 4
 	status.Width = 30
 	status.TextFgColor = ui.ColorWhite
 	status.BorderLabel = "STATE"
