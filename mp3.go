@@ -45,14 +45,14 @@ func (p *Player) Play() {
 }
 
 func (p *Player) Pause() {
-	status.Text = "PAUSE"
+	status.Text = "PAUSED\n" + p.GetTime()
 	draw()
 	p.player.SetState(gst.STATE_PAUSED)
 	p.playing = false
 }
 
 func (p *Player) Stop() {
-	status.Text = "STOPPED"
+	status.Text = "STOPPED\n" + p.GetTime()
 	draw()
 	p.player.SetState(gst.STATE_NULL)
 	p.playing = false
