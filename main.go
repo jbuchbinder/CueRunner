@@ -8,6 +8,10 @@ import (
 	"strings"
 )
 
+const (
+	CUE_PADDING = "          "
+)
+
 var (
 	CuesFile = flag.String("cues-file", "cues.txt", "Filename containing cues")
 
@@ -39,21 +43,21 @@ func main() {
 
 	player = NewPlayer()
 
-	par = ui.NewPar(cues[0])
+	par = ui.NewPar(CUE_PADDING + cues[0])
 	par.Height = 3
 	par.Width = 50
 	par.TextFgColor = ui.ColorWhite
 	par.BorderLabel = "CURRENT CUE"
 	par.BorderFg = ui.ColorCyan
 
-	status = ui.NewPar("STOPPED")
+	status = ui.NewPar("[STOPPED](fg-red)\n 00:00")
 	status.Height = 4
 	status.Width = 30
 	status.TextFgColor = ui.ColorWhite
 	status.BorderLabel = "STATE"
 	status.BorderFg = ui.ColorCyan
 
-	info = ui.NewPar("Ctrl-X : Exit   |   Enter : Play/Pause   |  Up/Down : Navigate")
+	info = ui.NewPar("  [Ctrl-X](fg-bold) : Exit   |   [Enter/Space](fg-bold) : Play/Pause   |  [Up/Down](fg-bold) : Navigate")
 	info.Height = 4
 	info.Width = 80
 	info.TextFgColor = ui.ColorWhite
@@ -96,6 +100,13 @@ func main() {
 		cl.Next()
 	})
 	ui.Handle("/sys/kbd/<enter>", func(ui.Event) {
+		if player.IsPlaying() {
+			player.Pause()
+		} else {
+			player.Play()
+		}
+	})
+	ui.Handle("/sys/kbd/<space>", func(ui.Event) {
 		if player.IsPlaying() {
 			player.Pause()
 		} else {

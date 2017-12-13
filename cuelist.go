@@ -20,7 +20,7 @@ func NewCueList(s []string) CueList {
 	// Create list UI
 	ls := ui.NewList()
 	ls.ItemFgColor = ui.ColorYellow
-	ls.BorderLabel = "Cues"
+	ls.BorderLabel = "CUES"
 	ls.Height = len(s) + 2
 	ls.Width = 80
 	ls.Y = 0
@@ -45,14 +45,12 @@ func (o *CueList) refreshCueView() {
 	o.listItems = []string{}
 	for i := 0; i < o.numItems; i++ {
 		if o.pos == i {
-			o.listItems = append(o.listItems, fmt.Sprintf("* %s", o.originalItems[i]))
+			o.listItems = append(o.listItems, fmt.Sprintf("--> [%s](fg-bold)", o.originalItems[i]))
 		} else {
-			o.listItems = append(o.listItems, fmt.Sprintf("  %s", o.originalItems[i]))
+			o.listItems = append(o.listItems, fmt.Sprintf("    %s", o.originalItems[i]))
 		}
 	}
 	o.Widget.Items = o.listItems
-	//fmt.Printf("displayitems: %#v\n", o.displayitems)
-	//fmt.Printf("items: %#v\n", o.items)
 }
 
 func (o *CueList) Prev() {
@@ -62,7 +60,8 @@ func (o *CueList) Prev() {
 	}
 
 	o.pos--
-	par.Text = o.GetSelectedCue()
+	par.Text = CUE_PADDING + o.GetSelectedCue()
+	status.Text = "[STOPPED](fg-red)\n 00:00"
 	player.Stop()
 	player.SetFile(par.Text)
 
@@ -77,7 +76,8 @@ func (o *CueList) Next() {
 	}
 
 	o.pos++
-	par.Text = o.GetSelectedCue()
+	par.Text = CUE_PADDING + o.GetSelectedCue()
+	status.Text = "[STOPPED](fg-red)\n 00:00"
 	player.Stop()
 	player.SetFile(par.Text)
 
