@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	//"fmt"
 	ui "github.com/gizak/termui"
 	"io/ioutil"
@@ -8,14 +9,18 @@ import (
 )
 
 var (
+	CuesFile = flag.String("cues-file", "cues.txt", "Filename containing cues")
+
 	draw              func()
 	par, status, info *ui.Par
 	player            *Player
 )
 
 func main() {
+	flag.Parse()
+
 	// Import cues from cues file
-	cuelist, err := ioutil.ReadFile("cues.txt")
+	cuelist, err := ioutil.ReadFile(*CuesFile)
 	if err != nil {
 		panic(err)
 	}
@@ -25,8 +30,6 @@ func main() {
 	if cues[len(cues)-1] == "" {
 		cues = cues[:len(cues)-2]
 	}
-
-	//fmt.Printf("%#v\n", cues)
 
 	err = ui.Init()
 	if err != nil {
@@ -102,8 +105,6 @@ func main() {
 
 	draw()
 	ui.Body.Align()
-
 	ui.Render(ui.Body)
-
 	ui.Loop()
 }
