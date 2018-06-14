@@ -1,5 +1,7 @@
 # CueRunner
 
+[![Report Card](https://goreportcard.com/badge/github.com/jbuchbinder/CueRunner)](https://goreportcard.com/report/github.com/jbuchbinder/CueRunner)
+
 Stage cue management software.
 
 ## Sample cues.txt file
