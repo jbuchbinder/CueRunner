@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/ziutek/gst"
 	"path/filepath"
 	"time"
+
+	"github.com/danielpaulus/gst"
 )
 
 type Player struct {

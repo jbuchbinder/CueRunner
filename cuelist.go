@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	ui "github.com/gizak/termui"
 	//"strings"
+
+	ui "github.com/gizak/termui"
 )
 
 type CueList struct {

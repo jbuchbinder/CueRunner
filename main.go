@@ -3,9 +3,10 @@ package main
 import (
 	"flag"
 	//"fmt"
-	ui "github.com/gizak/termui"
 	"io/ioutil"
 	"strings"
+
+	ui "github.com/gizak/termui"
 )
 
 const (
