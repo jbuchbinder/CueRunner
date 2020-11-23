@@ -1,4 +1,7 @@
 CueRunner
 *.exe
+
 cues.txt
 *.mp3
+
+go.sum
